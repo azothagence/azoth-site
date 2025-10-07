@@ -1,12 +1,402 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Azoth Agence</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AZOTH — Agence digitale</title>
+  <meta name="description" content="AZOTH — L'alchimie digitale au service de votre croissance. Automatisation IA, community management, création de contenu." />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg-left: #f6a7b8;
+      --bg-right: #9ec9ea;
+      --glass: rgba(255,255,255,0.08);
+      --glass-2: rgba(255,255,255,0.06);
+      --accent: rgba(255,255,255,0.85);
+      --muted: rgba(255,255,255,0.75);
+      --maxwidth: 1100px;
+      --radius: 14px;
+      color-scheme: light;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      background: linear-gradient(120deg,var(--bg-left),var(--bg-right));
+      min-height:100vh;
+      color: #0b1220;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-x:hidden;
+      scroll-behavior:smooth;
+    }
+    .back-visual{
+      position:fixed;
+      inset: -10% -10% auto -10%;
+      height:70vh;
+      width:120%;
+      background-image: url("assets/visual.jpg");
+      background-size: cover;
+      background-position: center;
+      filter: blur(28px) saturate(120%) contrast(95%);
+      opacity:0.35;
+      pointer-events:none;
+      z-index:0;
+      mix-blend-mode: screen;
+      animation: drift 30s linear infinite;
+    }
+    @keyframes drift{
+      0%{transform:translateY(0) rotate(0)}
+      50%{transform:translateY(-3%) rotate(0.4deg)}
+      100%{transform:translateY(0) rotate(0)}
+    }
+    header{
+      position:relative;
+      z-index:10;
+      max-width:var(--maxwidth);
+      margin: 28px auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 0 20px;
+    }
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+    .logo img{height:46px; width:auto; display:block}
+    nav a{
+      color:var(--accent);
+      text-decoration:none;
+      margin:0 12px;
+      font-weight:600;
+      opacity:0.95;
+      transition:opacity .18s, transform .18s;
+    }
+    nav a:hover{opacity:1; transform:translateY(-3px)}
+    .btn-ghost{
+      border:1px solid rgba(255,255,255,0.25);
+      padding:8px 14px;
+      border-radius:10px;
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:600;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    }
+    main{position:relative; z-index:5; max-width:var(--maxwidth); margin:0 auto; padding: 18px;}
+    .hero{
+      min-height:72vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:48px;
+      padding:28px;
+      position:relative;
+    }
+    .hero-inner{
+      width:100%;
+      display:grid;
+      grid-template-columns: 1fr 460px;
+      gap:32px;
+      align-items:center;
+    }
+    .hero-left{
+      padding:28px;
+    }
+    .brand-title{
+      font-family:"Poppins", "Inter";
+      font-size: clamp(28px, 6vw, 44px);
+      color: white;
+      margin: 6px 0 12px 0;
+      letter-spacing: -1px;
+      font-weight:700;
+      text-shadow: 0 6px 30px rgba(11,18,32,0.12);
+    }
+    .tagline{
+      color: rgba(255,255,255,0.95);
+      font-size: clamp(16px, 2.2vw, 18px);
+      margin: 12px 0 22px 0;
+      line-height:1.45;
+      max-width:720px;
+    }
+    .kpis{
+      display:flex;
+      gap:18px;
+      margin-top:18px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .kpi{
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      padding:10px 14px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+      color:var(--accent);
+      font-weight:600;
+    }
+    .ctas{display:flex; gap:12px; margin-top:18px;}
+    .cta-primary{
+      background: white;
+      color: #0b1220;
+      padding:12px 18px;
+      border-radius:12px;
+      font-weight:700;
+      box-shadow: 0 10px 30px rgba(11,18,32,0.12);
+      text-decoration:none;
+    }
+    .cta-secondary{padding:12px 18px; border-radius:12px; text-decoration:none; color:var(--accent); border:1px solid rgba(255,255,255,0.08)}
+    .visual-block{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      height:420px;
+      border-radius:18px;
+      overflow:visible;
+      pointer-events:none;
+    }
+    .visual-card{
+      width:420px;
+      height:420px;
+      border-radius: 22px;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      box-shadow: 0 18px 60px rgba(11,18,32,0.18);
+      backdrop-filter: blur(8px);
+      overflow:visible;
+    }
+    .visual-card img.logo-large{
+      width:78%;
+      pointer-events:auto;
+      z-index:8;
+      filter: drop-shadow(0 20px 40px rgba(11,18,32,0.14));
+    }
+    .orb{
+      position:absolute;
+      border-radius:50%;
+      background-image: url("assets/visual.jpg");
+      background-size:cover;
+      background-position:center;
+      opacity:0.95;
+      mix-blend-mode: screen;
+      filter:drop-shadow(0 10px 40px rgba(11,18,32,0.1)) saturate(120%);
+      transform: translate3d(0,0,0);
+    }
+    .orb.small{width:62px;height:62px; right:-28px; top:20px; animation: floaty 6s ease-in-out infinite}
+    .orb.medium{width:120px;height:120px; left:-32px; bottom:18px; animation: floaty 10s ease-in-out infinite}
+    .orb.big{width:220px;height:220px; right: -60px; bottom: -50px; opacity:0.95; animation: floaty 14s ease-in-out infinite}
+    @keyframes floaty{
+      0%{transform:translateY(0) rotate(0deg)}
+      50%{transform:translateY(-12px) rotate(2deg)}
+      100%{transform:translateY(0) rotate(0deg)}
+    }
+    section{padding:84px 20px; position:relative; z-index:5}
+    .wrap{max-width:var(--maxwidth); margin:0 auto}
+    .services-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap:22px;
+      align-items:stretch;
+    }
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:18px;
+      min-height:150px;
+      backdrop-filter: blur(6px);
+      transition: transform .38s cubic-bezier(.2,.9,.2,1), box-shadow .28s;
+      color:var(--accent);
+    }
+    .card:hover{
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: 0 28px 80px rgba(11,18,32,0.15);
+    }
+    .card h3{margin:6px 0 10px 0; font-size:18px; font-weight:700}
+    .card p{opacity:0.95; line-height:1.5}
+    .two-col{display:grid; grid-template-columns: 1fr 420px; gap:28px; align-items:start}
+    .contact-card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:18px;
+      border-radius:12px;
+      backdrop-filter: blur(6px);
+    }
+    form label{display:block; font-size:13px; margin-bottom:6px; color:var(--muted)}
+    form input, form textarea{
+      width:100%;
+      padding:12px 14px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.02);
+      color:var(--accent);
+      font-size:15px;
+      margin-bottom:12px;
+      resize:vertical;
+    }
+    .form-row{display:flex; gap:10px}
+    .form-row .col{flex:1}
+    footer{padding:30px 20px; text-align:center; color:rgba(255,255,255,0.8)}
+    small{opacity:0.8}
+    @media (max-width:980px){
+      .hero-inner{grid-template-columns:1fr}
+      .two-col{grid-template-columns:1fr}
+      header{padding:12px}
+      .visual-card{width:320px;height:320px}
+    }
+    .reveal{opacity:0; transform: translateY(12px); transition: opacity .9s cubic-bezier(.2,.9,.2,1), transform .9s}
+    .reveal.in-view{opacity:1; transform: translateY(0)}
+  </style>
 </head>
 <body>
-    <h1>Bienvenue sur le site d'Azoth Agence</h1>
-    <p>Découvrez nos services.</p>
+  <div class="back-visual" aria-hidden="true"></div>
+  <header>
+    <div class="logo">
+      <img src="assets/logo-azoth.jpg" alt="Logo AZOTH" style="height:42px">
+    </div>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#about">À propos</a>
+      <a href="#contact" class="btn-ghost">Contact / RDV</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="brand-title">AZOTH</div>
+          <div class="tagline">L'alchimie digitale au service de votre croissance</div>
+          <div class="kpis">
+            <div class="kpi">+ de <strong>5M</strong> vues</div>
+            <div class="kpi">Automatisation IA • Community • Contenu</div>
+            <div class="kpi">Stratégie & Viral Growth</div>
+          </div>
+          <div class="ctas">
+            <a class="cta-primary" href="#contact">Prendre rendez-vous</a>
+            <a class="cta-secondary" href="#services">Nos services</a>
+          </div>
+        </div>
+        <div class="visual-block" aria-hidden="true">
+          <div class="visual-card">
+            <img src="assets/logo-azoth.jpg" alt="AZOTH" class="logo-large">
+            <div class="orb small"></div>
+            <div class="orb medium"></div>
+            <div class="orb big"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="services">
+      <div class="wrap">
+        <h2 class="reveal">Nos services</h2>
+        <p class="reveal" style="opacity:0.9;max-width:860px">
+          Nous accompagnons marques, créateurs et entreprises à accélérer leur visibilité et leurs conversions grâce à
+          l'automatisation intelligente, une présence sociale stratégique et du contenu qui performe.
+        </p>
+        <div class="services-grid" style="margin-top:22px;">
+          <div class="card reveal">
+            <h3>Automatisation & IA</h3>
+            <p>Création de workflows, assistants IA, automatisation des tâches marketing & ventes pour scaler sans complexité.</p>
+          </div>
+          <div class="card reveal">
+            <h3>Community Management</h3>
+            <p>Stratégie & déploiement social : calendrier éditorial, modération, growth et optimisation des audiences.</p>
+          </div>
+          <div class="card reveal">
+            <h3>Création de contenu</h3>
+            <p>Contenu vidéo & audio pensé pour la viralité (podcasts et vidéos d'influence) — formats optimisés pour les plateformes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="about" style="padding-top:40px;">
+      <div class="wrap two-col">
+        <div class="reveal">
+          <h3>Qui sommes-nous ?</h3>
+          <p><strong>Elias-Milan Ferragu</strong> & <strong>Guillaume Pageau</strong> — associés dans le monde digital. Nous concevons des stratégies
+            et des systèmes pour amplifier les histoires qui fonctionnent. Nous avons déjà généré plus de <strong>5 millions de vues</strong> pour nos partenaires.</p>
+          <p>Notre approche : esthétique minimaliste, méthode data-driven, et automatisation IA pour gagner du temps et multiplier l'impact.</p>
+        </div>
+        <aside class="contact-card reveal" aria-labelledby="contact-title">
+          <h4 id="contact-title">Contact rapide</h4>
+          <p style="margin-top:6px; margin-bottom:12px; color:var(--muted)">Envoyez-nous un message ou prenez directement rendez-vous.</p>
+          <!-- Simple contact form (Formspree) -->
+          <form id="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+            <label for="name">Nom</label>
+            <input id="name" name="name" placeholder="Elias / Guillaume / Client" required>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" placeholder="contact@exemple.com" required>
+            <label for="msg">Message</label>
+            <textarea id="msg" name="message" rows="4" placeholder="Décrivez rapidement votre projet..." required></textarea>
+            <div style="display:flex; gap:10px;">
+              <button type="submit" class="cta-primary" style="border:none;display:inline-block">Envoyer</button>
+              <a class="btn-ghost" href="https://calendly.com/your-calendly" target="_blank" rel="noopener">Prendre un RDV</a>
+            </div>
+            <small style="display:block;margin-top:8px;color:var(--muted)">Ou réservez via Calendly (remplacez le lien par votre lien).</small>
+          </form>
+        </aside>
+      </div>
+    </section>
+    <section id="contact" style="padding-top:28px;">
+      <div class="wrap">
+        <h3 class="reveal">Rendez-vous</h3>
+        <p class="reveal">Choisissez un créneau via notre calendrier. (Calendly intégré ou lien direct).</p>
+        <div style="margin-top:18px; border-radius:12px; overflow:hidden; box-shadow: 0 18px 40px rgba(11,18,32,0.12);">
+          <iframe src="https://calendly.com/your-calendly" style="width:100%;min-height:640px;border:0;" title="Calendly — Prendre rendez-vous"></iframe>
+        </div>
+      </div>
+    </section>
+    <footer>
+      <div class="wrap">
+        <p>AZOTH — L'alchimie digitale au service de votre croissance</p>
+        <small>© <span id="year"></span> Elias-Milan Ferragu & Guillaume Pageau — Tous droits réservés</small>
+      </div>
+    </footer>
+  </main>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('in-view'); obs.unobserve(e.target) }
+      })
+    }, {threshold:0.12});
+    reveals.forEach(r=>obs.observe(r));
+    const visual = document.querySelector('.visual-block');
+    const orbs = document.querySelectorAll('.orb');
+    if(visual){
+      visual.addEventListener('pointermove', (ev)=>{
+        const rect = visual.getBoundingClientRect();
+        const x = (ev.clientX - rect.left) / rect.width - 0.5;
+        const y = (ev.clientY - rect.top) / rect.height - 0.5;
+        orbs.forEach((o,i)=>{
+          const depth = (i+1) * 6;
+          const tx = -x * depth;
+          const ty = -y * depth;
+          o.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+        });
+      });
+      visual.addEventListener('pointerleave', ()=>{
+        orbs.forEach(o => o.style.transform = 'translate3d(0,0,0)');
+      });
+    }
+    const form = document.getElementById('contact-form');
+    if(form){
+      form.addEventListener('submit', (e)=>{
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = "Envoi…";
+        setTimeout(()=>{ btn.disabled=false; btn.textContent = "Envoyer" }, 2500);
+      });
+    }
+  </script>
 </body>
-</html>
+</html> Ajout du vrai site Azoth (design complet)
